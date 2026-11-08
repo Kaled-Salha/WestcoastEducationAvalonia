@@ -1,0 +1,79 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Client.ViewModels"
+             xmlns:models="using:Client.Models"
+             x:Class="Client.Views.StudentsView"
+             x:DataType="vm:StudentsViewModel">
+
+  <ScrollViewer>
+    <StackPanel Margin="20" Spacing="10">
+
+      <TextBlock Text="Westcoast Education - Students"
+                 Classes="pageTitle"/>
+
+      <Button Content="Load students"
+              Command="{Binding LoadStudentsCommand}"
+              HorizontalAlignment="Left"/>
+
+      <TextBlock Text="Add a new student"
+                 FontSize="18"
+                 FontWeight="Bold"/>
+
+      <TextBox PlaceholderText="First name"
+               Text="{Binding NewStudent.FirstName, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Last name"
+               Text="{Binding NewStudent.LastName, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Phone"
+               Text="{Binding NewStudent.Phone, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Personal number"
+               Text="{Binding NewStudent.PersonalNumber, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Street"
+               Text="{Binding NewStudent.Address.Street, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Postal code"
+               Text="{Binding NewStudent.Address.PostalCode, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="City"
+               Text="{Binding NewStudent.Address.City, Mode=TwoWay}"/>
+
+      <Button Content="Add student"
+              Classes="primary"
+              Command="{Binding AddStudentCommand}"
+              HorizontalAlignment="Left"/>
+
+      <TextBlock Text="{Binding StatusMessage}"/>
+
+      <TextBlock Text="Students"
+                 FontSize="18"
+                 FontWeight="Bold"/>
+
+      <ItemsControl ItemsSource="{Binding Students}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="models:Student">
+            <Grid ColumnDefinitions="150,150,180,*"
+                  Margin="0 5">
+
+              <TextBlock Text="{Binding FirstName}"/>
+
+              <TextBlock Grid.Column="1"
+                         Text="{Binding LastName}"/>
+
+              <TextBlock Grid.Column="2"
+                         Text="{Binding Phone}"/>
+
+              <TextBlock Grid.Column="3"
+                         Text="{Binding Address.City}"/>
+
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+    </StackPanel>
+  </ScrollViewer>
+
+</UserControl>

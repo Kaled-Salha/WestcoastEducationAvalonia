@@ -1,0 +1,23 @@
+<ResourceDictionary
+  xmlns="https://github.com/avaloniaui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Colors -->
+  <SolidColorBrush x:Key="PrimaryBrush"
+                   Color="#2563EB"/>
+
+  <SolidColorBrush x:Key="DangerBrush"
+                   Color="#DC2626"/>
+
+  <SolidColorBrush x:Key="TextBrush"
+                   Color="#F8FAFC"/>
+
+  <SolidColorBrush x:Key="WhiteBrush"
+                   Color="#FFFFFF"/>
+
+  <!-- Layout and sizing -->
+  <x:Double x:Key="PageTitleSize">24</x:Double>
+
+  <Thickness x:Key="PagePadding">20</Thickness>
+
+</ResourceDictionary>

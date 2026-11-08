@@ -1,0 +1,32 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <!-- Primary buttons -->
+  <Style Selector="Button.primary">
+    <Setter Property="Background"
+            Value="{DynamicResource PrimaryBrush}"/>
+    <Setter Property="Foreground"
+            Value="{DynamicResource WhiteBrush}"/>
+    <Setter Property="Padding"
+            Value="16,8"/>
+  </Style>
+
+  <!-- Delete buttons -->
+  <Style Selector="Button.danger">
+    <Setter Property="Background"
+            Value="{DynamicResource DangerBrush}"/>
+    <Setter Property="Foreground"
+            Value="{DynamicResource WhiteBrush}"/>
+  </Style>
+
+  <!-- Page headings -->
+  <Style Selector="TextBlock.pageTitle">
+    <Setter Property="FontSize"
+            Value="{DynamicResource PageTitleSize}"/>
+    <Setter Property="FontWeight"
+            Value="Bold"/>
+    <Setter Property="Foreground"
+            Value="{DynamicResource TextBrush}"/>
+  </Style>
+
+</Styles>

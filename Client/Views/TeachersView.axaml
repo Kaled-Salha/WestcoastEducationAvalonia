@@ -1,0 +1,112 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Client.ViewModels"
+             xmlns:models="using:Client.Models"
+             x:Class="Client.Views.TeachersView"
+             x:DataType="vm:TeachersViewModel">
+
+  <ScrollViewer>
+    <StackPanel Margin="20" Spacing="10">
+
+      <TextBlock Text="Westcoast Education - Teachers"
+                 Classes="pageTitle"/>
+
+      <Button Content="Load teachers"
+              Command="{Binding LoadTeachersCommand}"
+              HorizontalAlignment="Left"/>
+
+
+      <TextBlock Text="Add a new teacher"
+                 FontSize="18"
+                 FontWeight="Bold"
+                 IsVisible="{Binding !IsEditing}"/>
+
+      <TextBlock Text="Edit teacher"
+                 FontSize="18"
+                 FontWeight="Bold"
+                 IsVisible="{Binding IsEditing}"/>
+
+
+      <TextBox PlaceholderText="First name"
+               Text="{Binding NewTeacher.FirstName, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Last name"
+               Text="{Binding NewTeacher.LastName, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Phone"
+               Text="{Binding NewTeacher.Phone, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Personal number"
+               Text="{Binding NewTeacher.PersonalNumber, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Street"
+               Text="{Binding NewTeacher.Address.Street, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Postal code"
+               Text="{Binding NewTeacher.Address.PostalCode, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="City"
+               Text="{Binding NewTeacher.Address.City, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Knowledge area"
+               Text="{Binding NewTeacher.KnowledgeArea, Mode=TwoWay}"/>
+
+
+      <Button Content="Add teacher"
+              Classes="primary"
+              Command="{Binding AddTeacherCommand}"
+              IsVisible="{Binding !IsEditing}"
+              HorizontalAlignment="Left"/>
+
+      <Button Content="Save changes"
+              Classes="primary"
+              Command="{Binding UpdateTeacherCommand}"
+              IsVisible="{Binding IsEditing}"
+              HorizontalAlignment="Left"/>
+
+      <Button Content="Cancel edit"
+              Command="{Binding CancelEditCommand}"
+              IsVisible="{Binding IsEditing}"
+              HorizontalAlignment="Left"/>
+
+
+
+      <TextBlock Text="{Binding StatusMessage}"/>
+
+      <TextBlock Text="Teachers"
+                 FontSize="18"
+                 FontWeight="Bold"/>
+
+      <ItemsControl ItemsSource="{Binding Teachers}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="models:TeacherRestDb">
+
+            <Grid ColumnDefinitions="150,150,180,150,100"
+                  Margin="0 5">
+
+              <TextBlock Text="{Binding FirstName}"/>
+
+              <TextBlock Grid.Column="1"
+                         Text="{Binding LastName}"/>
+
+              <TextBlock Grid.Column="2"
+                         Text="{Binding KnowledgeArea}"/>
+
+              <TextBlock Grid.Column="3"
+                         Text="{Binding Address.City}"/>
+
+              <Button Grid.Column="4"
+                      Content="Edit"
+                      Command="{Binding $parent[UserControl].((vm:TeachersViewModel)DataContext).EditTeacherCommand}"
+                      CommandParameter="{Binding}"/>
+
+            </Grid>
+
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+
+    </StackPanel>
+  </ScrollViewer>
+
+</UserControl>

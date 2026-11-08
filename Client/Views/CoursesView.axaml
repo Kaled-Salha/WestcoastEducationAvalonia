@@ -1,0 +1,98 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:Client.ViewModels"
+             xmlns:models="using:Client.Models"
+             x:Class="Client.Views.CoursesView"
+             x:DataType="vm:CoursesViewModel">
+
+  <StackPanel Margin="20" Spacing="15">
+
+    <TextBlock Text="Westcoast Education - Courses"
+               Classes="pageTitle"/>
+
+    <Button Content="Load courses"
+            Command="{Binding LoadCoursesCommand}"
+            HorizontalAlignment="Left"/>
+
+    <StackPanel Spacing="8">
+
+      <TextBlock Text="Add a new course"
+                 FontSize="18"
+                 FontWeight="Bold"
+                 IsVisible="{Binding !IsEditing}"/>
+
+      <TextBlock Text="Edit course"
+                 FontSize="18"
+                 FontWeight="Bold"
+                 IsVisible="{Binding IsEditing}"/>
+
+
+      <TextBox PlaceholderText="Course number"
+               Text="{Binding NewCourseNumber, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Course name"
+               Text="{Binding NewCourseName, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Duration in weeks"
+               Text="{Binding NewDuration, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="Start date (yyyy-MM-dd)"
+               Text="{Binding NewStartDate, Mode=TwoWay}"/>
+
+      <TextBox PlaceholderText="End date (yyyy-MM-dd)"
+               Text="{Binding NewEndDate, Mode=TwoWay}"/>
+
+      <TextBlock Text="Course type: 1 = Classroom, 2 = Distance"/>
+
+      <TextBox Text="{Binding NewCourseType, Mode=TwoWay}"/>
+
+
+      <Button Content="Add course"
+              Classes="primary"
+              Command="{Binding AddCourseCommand}"
+              IsVisible="{Binding !IsEditing}"
+              HorizontalAlignment="Left"/>
+
+      <Button Content="Save changes"
+              Classes="primary"
+              Command="{Binding UpdateCourseCommand}"
+              IsVisible="{Binding IsEditing}"
+              HorizontalAlignment="Left"/>
+
+      <Button Content="Cancel edit"
+              Command="{Binding CancelEditCommand}"
+              IsVisible="{Binding IsEditing}"
+              HorizontalAlignment="Left"/>
+
+    </StackPanel>
+
+
+    <TextBlock Text="{Binding StatusMessage}"/>
+
+    <ScrollViewer Height="200">
+      <ItemsControl ItemsSource="{Binding Courses}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="models:CourseRestDb">
+            <Grid ColumnDefinitions="100,200,100,100,100" Margin="0 5">
+              <TextBlock Text="{Binding CourseNumber}"/>
+              <TextBlock Grid.Column="1" Text="{Binding CourseName}"/>
+              <TextBlock Grid.Column="2" Text="{Binding DurationInWeeks}"/>
+              <Button Grid.Column="4"
+                      Content="Delete"
+                      Classes="danger"
+                      Command="{Binding $parent[UserControl].((vm:CoursesViewModel)DataContext).DeleteCourseCommand}"
+                      CommandParameter="{Binding Id}"/>
+
+              <Button Grid.Column="3"
+                      Content="Edit"
+                      Command="{Binding $parent[UserControl].((vm:CoursesViewModel)DataContext).EditCourseCommand}"
+                      CommandParameter="{Binding}"/>
+
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+
+  </StackPanel>
+</UserControl>
